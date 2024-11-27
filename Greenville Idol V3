@@ -1,0 +1,49 @@
+using System;
+
+class Program {
+    public static void Main(string[] args) {
+        while (true) {
+            Console.WriteLine("\nGreenville Idol Competition");
+            Console.WriteLine("1. Compare Contestant Numbers");
+            Console.WriteLine("2. Exit");
+            Console.Write("Enter your choice (1-2): ");
+
+            string choice = Console.ReadLine();
+
+            if (choice == "1") {
+                ProcessContestants();
+            } else if (choice == "2") {
+                break;
+            } else {
+                Console.WriteLine("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    private static int GetValidContestantNumber(string prompt) {
+        int number;
+        while (true) {
+            Console.Write(prompt);
+            if (int.TryParse(Console.ReadLine(), out number)) {
+                if (number >= 0 && number <= 30) {
+                    return number;
+                }
+            }
+            Console.WriteLine("Please enter a valid number between 0 and 30.");
+        }
+    }
+
+    private static void ProcessContestants() {
+        int lastYear = GetValidContestantNumber("Enter number of contestants from last year (0-30): ");
+        int thisYear = GetValidContestantNumber("Enter number of contestants this year (0-30): ");
+
+        // Compare contestants and display appropriate message
+        if (thisYear > (lastYear * 2)) {
+            Console.WriteLine("The competition is more than twice as big this year!");
+        } else if (thisYear > lastYear) {
+            Console.WriteLine("The competition is bigger than ever!");
+        } else {
+            Console.WriteLine("A tighter race this year! Come out and cast your vote!");
+        }
+    }
+}
